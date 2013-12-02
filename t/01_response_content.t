@@ -8,6 +8,13 @@ use Test::More tests => 2;
 use Dancer2;
 use Dancer2::Test;
 
+set engines => {
+      template => {
+        Haml => {
+          cache => 0,
+        },
+      },
+};
 set template => 'Haml';
 
 get '/' => sub { template 'myview', {}, {layout => undef} };

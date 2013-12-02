@@ -9,11 +9,11 @@ use Moo;
 use Dancer2::Core::Types 'InstanceOf';
 use Dancer2::FileUtils 'path';
 
-use Carp 'croak';
+use Carp qw/croak/;
 
 use Text::Haml;
 
-our $VERSION = 0.02; # VERSION
+our $VERSION = 0.03; # VERSION
 # ABSTRACT: Text::Haml template engine wrapper for Dancer2
 
 with 'Dancer2::Core::Role::Template';
@@ -41,6 +41,17 @@ sub layout_pathname {
             ? path('layouts', $layout)
             : path($self->views, 'layouts', $layout);
 }
+
+sub render_layout {
+    my ($self, $layout, $tokens, $content) = @_;
+ 
+    $layout = $self->layout_pathname($layout);
+
+    $self->engine->escape_html(0);
+ 
+    # FIXME: not sure if I can "just call render"
+    $self->render( $layout, { %$tokens, content => $content } );
+}
  
 sub _build_engine {
     my $self = shift;
@@ -61,6 +72,10 @@ sub render {
     my $haml = $self->engine;
     my $content = $haml->render_file($template, %$vars)
       or croak $haml->error;
+
+    # In the method layout set escape_html in 0 to insert the contents of a page
+    # For all other cases set escape_html 1
+    $haml->escape_html(1);
 
     return $content;
 }

@@ -27,7 +27,7 @@ no_index:
 provides:
   Dancer2::Template::Haml:
     file: lib/Dancer2/Template/Haml.pm
-    version: 0.02
+    version: 0.03
 requires:
   Carp: 0
   Dancer2::Core::Role::Template: 0
@@ -43,6 +43,6 @@ resources:
   bugtracker: https://github.com/TheAthlete/Dancer2-Template-Haml/issues
   homepage: https://github.com/TheAthlete/Dancer2-Template-Haml
   repository: https://github.com/TheAthlete/Dancer2-Template-Haml.git
-version: 0.02
+version: 0.03
 x_contributors:
   - 'TheAthlete <theathlet@yandex.ru>'

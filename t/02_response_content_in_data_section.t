@@ -7,9 +7,21 @@ use Test::More tests => 2;
 
 use Dancer2;
 use Dancer2::Test;
-use Data::Section::Simple qw/get_data_section/;
+use Dancer2::FileUtils 'path';
 
-my $vpath = get_data_section;
+use Data::Section::Simple 'get_data_section';
+
+my $vpath_tmp = get_data_section;
+my @data = %$vpath_tmp;
+my $vpath = {};
+while (@data) {
+  my ($name, $content) = splice @data, 0, 2;
+
+  # from linux/unix to windows: 'path/file.name' -> 'path\file.name'
+  # from windows to linux/unix: 'path\file.name' -> 'path/file.name'
+  $name = path(split /\\|\//, $name); 
+  $vpath->{$name} = $content;
+}
 
 set engines => {
       template => {
