@@ -59,7 +59,7 @@
    "provides" : {
       "Dancer2::Template::Haml" : {
          "file" : "lib/Dancer2/Template/Haml.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       }
    },
    "release_status" : "stable",
@@ -73,7 +73,7 @@
          "web" : "https://github.com/TheAthlete/Dancer2-Template-Haml"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_contributors" : [
       "TheAthlete <theathlet@yandex.ru>"
    ]

@@ -7,7 +7,7 @@ use Test::More tests => 2;
 
 use Dancer2;
 use Dancer2::Test;
-use Dancer2::FileUtils 'path';
+use Dancer2::FileUtils;
 
 use Data::Section::Simple 'get_data_section';
 
@@ -19,7 +19,7 @@ while (@data) {
 
   # from linux/unix to windows: 'path/file.name' -> 'path\file.name'
   # from windows to linux/unix: 'path\file.name' -> 'path/file.name'
-  $name = path(split /\\|\//, $name); 
+  $name = Dancer2::FileUtils::path(split /\\|\//, $name); 
   $vpath->{$name} = $content;
 }
 
